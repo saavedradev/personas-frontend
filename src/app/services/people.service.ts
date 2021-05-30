@@ -2,9 +2,11 @@ import { DatePipe, formatDate } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
 import { Person } from '../models/person';
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -35,5 +37,21 @@ export class PeopleService {
         (response as Person[]).forEach(person => console.log(person.fullName));
       })
     );
+  }
+
+  create(person: Person): Observable<Person> {
+    return this.http.post(this.urlEndPoint, person)
+      .pipe(
+        map((response: any) => response.persona),
+        catchError(e => {
+
+          if (e.status == 400) {
+            return throwError(e);
+          }
+
+          console.error(e.error.mensaje);
+          return throwError(e);
+        })
+      );
   }
 }

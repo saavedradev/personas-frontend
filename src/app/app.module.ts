@@ -12,6 +12,7 @@ import { registerLocaleData } from '@angular/common';
 import localeES from '@angular/common/locales/es';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { CreatePersonComponent } from './create-person/create-person.component';
 
 
 registerLocaleData(localeES, 'es');
@@ -19,6 +20,7 @@ registerLocaleData(localeES, 'es');
 const routes: Routes = [
   { path: '', redirectTo: '/people', pathMatch: 'full' },
   { path: 'people', component: PeopleComponent },
+  { path: 'people/create', component: CreatePersonComponent },
 ];
 
 @NgModule({
@@ -26,7 +28,8 @@ const routes: Routes = [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    PeopleComponent
+    PeopleComponent,
+    CreatePersonComponent
   ],
   imports: [
     BrowserModule,
