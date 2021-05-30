@@ -19,6 +19,7 @@
             <th>Fevha Nacimiento</th>
             <th>Identificación del padre</th>
             <th>Identificación de la Madre</th>
+            <th>Adoptar</th>
           </tr>
         </thead>
         <tbody>
@@ -28,6 +29,9 @@
             <td>{{ person.birth | date:"EEEE dd, MMMM yyyy"}}</td>
             <td>{{ person.fatherId }}</td>
             <td>{{ person.motherId }}</td>
+            <td>
+              <button  *ngIf="(person.fatherId ==='' || person.motherId ==='') " type="button" name="editar" class="btn btn-primary btn-sm">Adoptar</button>
+            </td>
           </tr>
         </tbody>
       </table>
