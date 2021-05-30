@@ -18,7 +18,7 @@ export class PeopleComponent implements OnInit {
 
   loadDataPeople(): void{
     this.peopleService.getPeople().subscribe(response => {
-      this.people = response.content as Person[];
+      this.people = response as Person[];
     });
   }
 
