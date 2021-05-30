@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 import { Person } from '../models/person';
 import { PeopleService } from '../services/people.service';
 
@@ -29,11 +30,12 @@ export class CreatePersonComponent implements OnInit {
       .subscribe(
         person => {
           this.router.navigate(['/people']);
-          console.log( 'Nueva persona', `La persona ${person.fullName} ha sido creada con éxito`)
+          Swal.fire('Nueva persona', `La persona ${person.fullName} ha sido creada con éxito`);
         },
         err => {
           this.errores = err.error.errors as string[];
           console.error('Código del error desde el backend: ' + err.status);
+          Swal.fire('Error al crear', `La persona no se creó`);
           console.error(err.error.errors);
         }
       );
