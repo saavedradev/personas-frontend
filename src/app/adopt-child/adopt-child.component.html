@@ -20,11 +20,29 @@
                         class="btn btn-primary btn-sm">Buscar</button>
                 </div>
             </div>
-            <div class="form-group row alert alert-warning" *ngIf="person">
-                    <button class="btn btn-rounded btn-primary" type="button">
-                        Adoptar
-                    </button>
-           
+            <div class="form-group row alert" *ngIf="person">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                          <tr>
+                            <th>Identificación</th>
+                            <th>Nombre Completo</th>
+                            <th>Fevha Nacimiento</th>
+                            <th>Adoptar</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>{{ person.identification }}</td>
+                            <td>{{ person.fullName | uppercase }}</td>
+                            <td>{{ person.birth | date:"EEEE dd, MMMM yyyy"}}</td>
+                            <td>
+                                <button class="btn btn-rounded btn-primary" type="button">
+                                    Convertirse en padre o madre
+                                </button>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
             </div>
         </form>
 
