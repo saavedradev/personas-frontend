@@ -14,6 +14,8 @@ export class CreatePersonComponent implements OnInit {
 
   errores: string[];
 
+  genderOptions :Array<object>= [ {value: "M", name: "Quiero ser padre"}, {value: "F", name: "Quiero ser madre"}];
+
   constructor(private peopleService: PeopleService, private router: Router) { }
 
   ngOnInit(): void {
@@ -21,6 +23,8 @@ export class CreatePersonComponent implements OnInit {
 
   create(): void {
     console.log(this.person);
+    this.person.fatherId = "";
+    this.person.motherId = "";
     this.peopleService.create(this.person)
       .subscribe(
         person => {
