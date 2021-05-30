@@ -14,6 +14,7 @@ export class AdoptChildComponent implements OnInit {
   errores: string[];
   identificationParent: string;
   person: Person = new Person();
+  idChild: string = "";
   constructor( private peopleService: PeopleService, private router: Router, private activatedRoute: ActivatedRoute ) { }
 
   ngOnInit(): void {
@@ -21,7 +22,7 @@ export class AdoptChildComponent implements OnInit {
     this.activatedRoute.paramMap.subscribe(params => {
       let id = +params.get('id');
       if (id) {
-        console.log("ide*** "+id)
+        this.idChild = id.toString();
       }
     });
   }
@@ -37,4 +38,19 @@ export class AdoptChildComponent implements OnInit {
       );
   }
 
+  adopt(): void {
+    this.peopleService.adopt(this.person, this.idChild)
+      .subscribe(
+        response => {
+          this.router.navigate(['/people']);
+          Swal.fire('Nueva persona', `La persona ${this.person.fullName} adoptó con éxito`);
+        },
+        err => {
+          this.errores = err.error.errors as string[];
+          console.error('Código del error desde el backend: ' + err.status);
+          Swal.fire('Error al adoptar', `La persona np pudo adoptar`, 'error');
+          console.error(err.error.errors);
+        }
+      );
+  }
 }

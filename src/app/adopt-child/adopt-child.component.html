@@ -36,7 +36,7 @@
                             <td>{{ person.fullName | uppercase }}</td>
                             <td>{{ person.birth | date:"EEEE dd, MMMM yyyy"}}</td>
                             <td>
-                                <button class="btn btn-rounded btn-primary" type="button">
+                                <button class="btn btn-rounded btn-primary" type="button" (click)='adopt()'>
                                     Convertirse en padre o madre
                                 </button>
                             </td>

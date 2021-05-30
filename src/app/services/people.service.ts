@@ -1,10 +1,9 @@
 import { DatePipe, formatDate } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
-import Swal from 'sweetalert2';
+import { environment } from 'src/environments/environment';
 import { Person } from '../models/person';
 
 
@@ -13,12 +12,13 @@ import { Person } from '../models/person';
 })
 export class PeopleService {
 
-  private urlEndPoint: string = 'http://localhost:8080/api/people';
+  private urlEndPointPeople: string = `${environment.apiUrl}/api/people`;
+  private urlEndPointAdopt: string =  `${environment.apiUrl}/api/adopt/`;
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient) { }
 
   getPeople(): Observable<any> {
-    return this.http.get(this.urlEndPoint).pipe(
+    return this.http.get(this.urlEndPointPeople).pipe(
       tap((response: any) => {
         console.log('ClienteService: tap 1');
         (response as Person[]).forEach(person => console.log(person.fullName));
@@ -26,9 +26,6 @@ export class PeopleService {
       map((response: any) => {
         (response as Person[]).map(person => {
           person.fullName = person.fullName.toUpperCase();
-          //let datePipe = new DatePipe('es');
-          //person.birth = datePipe.transform(person.birth, 'EEEE dd, MMMM yyyy');
-          //person.birth = formatDate(person.birth, 'dd-MM-yyyy', 'es');
           return person;
         });
         return response;
@@ -41,7 +38,7 @@ export class PeopleService {
   }
 
   create(person: Person): Observable<Person> {
-    return this.http.post(this.urlEndPoint, person)
+    return this.http.post(this.urlEndPointPeople, person)
       .pipe(
         map((response: any) => response.persona),
         catchError(e => {
@@ -57,10 +54,24 @@ export class PeopleService {
   }
 
   getPerson(id): Observable<Person> {
-    return this.http.get<Person>(`${this.urlEndPoint}/${id}`).pipe(
+    return this.http.get<Person>(`${this.urlEndPointPeople}/${id}`).pipe(
       catchError(e => {
         return throwError(e);
       })
     );
+  }
+
+  adopt(person: Person, idChild: string): Observable<Person> {
+    return this.http.put(`${this.urlEndPointAdopt}/${idChild}`, person)
+      .pipe(
+        map((response: any) => response),
+        catchError(e => {
+          if (e.status == 400) {
+            return throwError(e);
+          }
+          console.error(e.error.mensaje);
+          return throwError(e);
+        })
+      );
   }
 }
