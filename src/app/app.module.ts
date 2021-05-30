@@ -8,7 +8,6 @@ import { FooterComponent } from './footer/footer.component';
 import { PeopleComponent } from './people/people.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatMomentDateModule } from '@angular/material-moment-adapter';
 
 @NgModule({
   declarations: [
@@ -21,7 +20,7 @@ import { MatMomentDateModule } from '@angular/material-moment-adapter';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    BrowserAnimationsModule, MatMomentDateModule
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
