@@ -8,7 +8,9 @@ import { PeopleService } from '../services/people.service';
   styleUrls: ['./adopt-child.component.css']
 })
 export class AdoptChildComponent implements OnInit {
-
+  titulo: string = "Adoptar Persona";
+  errores: string[];
+  identificationParent: string;
   constructor( private peopleService: PeopleService, private router: Router, private activatedRoute: ActivatedRoute ) { }
 
   ngOnInit(): void {
@@ -18,6 +20,10 @@ export class AdoptChildComponent implements OnInit {
         console.log("ide*** "+id)
       }
     });
+  }
+
+  search(){
+    console.log("ide*** "+this.identificationParent)
   }
 
 }

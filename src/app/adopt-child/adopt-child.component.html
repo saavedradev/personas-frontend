@@ -1,1 +1,27 @@
-<p>adopt-child works!</p>
+<ul class="alert alert-danger" *ngIf="errores?.length > 0">
+    <li *ngFor="let err of errores">
+      {{ err }}
+    </li>
+  </ul>
+  
+  <div class="card bg-dark text-white">
+    <div class="card-header">{{ titulo }}</div>
+    <div class="card-body">
+  
+      <form #personForm="ngForm">
+        <div class="form-group row">
+            <label for="identificationParent" class="col-form-label col-sm-2">Identificación futuro padre o madre</label>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" [(ngModel)]="identificationParent" name="identificationParent"> 
+            </div>
+            <div class="col-sm-6">
+                <button type="button" name="search" (click)='search()' class="btn btn-primary btn-sm" >Buscar</button>
+            </div>
+        </div>
+
+      </form>
+  
+    </div>
+  </div>
+  
+
