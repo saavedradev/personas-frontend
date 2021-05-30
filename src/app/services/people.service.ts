@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
+import Swal from 'sweetalert2';
 import { Person } from '../models/person';
 
 
@@ -53,5 +54,14 @@ export class PeopleService {
           return throwError(e);
         })
       );
+  }
+
+  getPerson(id): Observable<Person> {
+    return this.http.get<Person>(`${this.urlEndPoint}/${id}`).pipe(
+      catchError(e => {
+        Swal.fire('Advertencia', e.error.mensaje, 'warning');
+        return throwError(e);
+      })
+    );
   }
 }
