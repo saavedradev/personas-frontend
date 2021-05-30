@@ -59,7 +59,6 @@ export class PeopleService {
   getPerson(id): Observable<Person> {
     return this.http.get<Person>(`${this.urlEndPoint}/${id}`).pipe(
       catchError(e => {
-        Swal.fire('Advertencia', e.error.mensaje, 'warning');
         return throwError(e);
       })
     );

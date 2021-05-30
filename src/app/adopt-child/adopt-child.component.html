@@ -1,7 +1,7 @@
-<ul class="alert alert-danger" *ngIf="errores?.length > 0">
-    <li *ngFor="let err of errores">
-      {{ err }}
-    </li>
+<ul class="alert alert-warning" *ngIf="errores?.length > 0">
+    <button class="btn btn-rounded btn-primary" type="button" [routerLink]="['/people/create']">
+        Crear Persona
+      </button>
   </ul>
   
   <div class="card bg-dark text-white">

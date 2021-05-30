@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import Swal from 'sweetalert2';
 import { Person } from '../models/person';
 import { PeopleService } from '../services/people.service';
 
@@ -25,7 +26,13 @@ export class AdoptChildComponent implements OnInit {
   }
 
   search(){
-    this.peopleService.getPerson(this.identificationParent).subscribe((person) => this.person= person);
+    this.peopleService.getPerson(this.identificationParent).subscribe(
+      (person) => {this.person= person},
+      err => {
+        this.errores = err.error.mensaje as string[];
+        Swal.fire('Advertencia', err.error.mensaje, 'warning');
+      }
+      );
   }
 
 }
