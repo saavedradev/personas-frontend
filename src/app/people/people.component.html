@@ -30,7 +30,7 @@
             <td>{{ person.fatherId }}</td>
             <td>{{ person.motherId }}</td>
             <td>
-              <button  *ngIf="(person.fatherId ==='' || person.motherId ==='') " type="button" name="editar" class="btn btn-primary btn-sm">Adoptar</button>
+              <button  *ngIf="(person.fatherId ==='' || person.motherId ==='') " type="button" name="editar" class="btn btn-primary btn-sm" [routerLink]="['adopt', person.id]">Adoptar</button>
             </td>
           </tr>
         </tbody>
