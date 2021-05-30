@@ -35,7 +35,7 @@ export class CreatePersonComponent implements OnInit {
         err => {
           this.errores = err.error.errors as string[];
           console.error('Código del error desde el backend: ' + err.status);
-          Swal.fire('Error al crear', `La persona no se creó`);
+          Swal.fire('Error al crear', `La persona no se creó`, 'error');
           console.error(err.error.errors);
         }
       );

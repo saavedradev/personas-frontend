@@ -13,6 +13,7 @@ import localeES from '@angular/common/locales/es';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CreatePersonComponent } from './create-person/create-person.component';
+import { AdoptChildComponent } from './adopt-child/adopt-child.component';
 
 
 registerLocaleData(localeES, 'es');
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/people', pathMatch: 'full' },
   { path: 'people', component: PeopleComponent },
   { path: 'people/create', component: CreatePersonComponent },
+  { path: 'people/adopt/:id', component: AdoptChildComponent}
 ];
 
 @NgModule({
@@ -29,7 +31,8 @@ const routes: Routes = [
     HeaderComponent,
     FooterComponent,
     PeopleComponent,
-    CreatePersonComponent
+    CreatePersonComponent,
+    AdoptChildComponent
   ],
   imports: [
     BrowserModule,

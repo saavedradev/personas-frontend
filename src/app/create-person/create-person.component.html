@@ -44,7 +44,7 @@
         </div>
 
         <div class="form-group row">
-          <label for="birth" class="col-form-label col-sm-2">Fecha de cumpleaños</label>
+          <label for="birth" class="col-form-label col-sm-2">Fecha de nacimiento</label>
           <div class="col-sm-6">
             <input type="date" class="form-control" [(ngModel)]="person.birth" name="birth" #birth="ngModel"> 
             <div class="alert alert-danger" *ngIf="birth.invalid && (birth.dirty || birth.touched)">
