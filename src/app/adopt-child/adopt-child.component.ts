@@ -17,6 +17,7 @@ export class AdoptChildComponent implements OnInit {
   constructor( private peopleService: PeopleService, private router: Router, private activatedRoute: ActivatedRoute ) { }
 
   ngOnInit(): void {
+    this.person = null;
     this.activatedRoute.paramMap.subscribe(params => {
       let id = +params.get('id');
       if (id) {
@@ -29,6 +30,7 @@ export class AdoptChildComponent implements OnInit {
     this.peopleService.getPerson(this.identificationParent).subscribe(
       (person) => {this.person= person},
       err => {
+        this.person = null;
         this.errores = err.error.mensaje as string[];
         Swal.fire('Advertencia', err.error.mensaje, 'warning');
       }
