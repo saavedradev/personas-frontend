@@ -1,0 +1,39 @@
+
+<div class="card border-primary mb-3">
+    <div class="card-header">Personas</div>
+    <div class="card-body text-primary">
+      <h5 class="card-title">Listado de personas</h5>
+      <div class="my-2 text-left">
+        <button class="btn btn-rounded btn-primary" type="button" [routerLink]="['/people/create']">
+          Crear Persona
+        </button>
+      </div>
+      <div *ngIf="people?.length == 0" class="alert alert-info">
+        No hay registros en la base de datos!
+      </div>
+      <table class="table table-bordered table-striped" *ngIf="people?.length>0">
+        <thead>
+          <tr>
+            <th>Identificación</th>
+            <th>Nombre Completo</th>
+            <th>Fevha Nacimiento</th>
+            <th>Identificación del padre</th>
+            <th>Identificación de la Madre</th>
+            <th>Adoptar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let person of people">
+            <td>{{ person.identification }}</td>
+            <td>{{ person.fullName | uppercase }}</td>
+            <td>{{ person.birth | date:"EEEE dd, MMMM yyyy"}}</td>
+            <td>{{ person.fatherId }}</td>
+            <td>{{ person.motherId }}</td>
+            <td>
+              <button  *ngIf="(person.fatherId ==='' || person.motherId ==='') " type="button" name="adopt" class="btn btn-primary btn-sm" [routerLink]="['adopt', person.id]">Adoptar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
