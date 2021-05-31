@@ -20,7 +20,6 @@ export class PeopleService {
   getPeople(): Observable<any> {
     return this.http.get(this.urlEndPointPeople).pipe(
       tap((response: any) => {
-        console.log('ClienteService: tap 1');
         (response as Person[]).forEach(person => console.log(person.fullName));
       }),
       map((response: any) => {
@@ -31,7 +30,6 @@ export class PeopleService {
         return response;
       }),
       tap(response => {
-        console.log('ClienteService: tap 2');
         (response as Person[]).forEach(person => console.log(person.fullName));
       })
     );
